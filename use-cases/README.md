@@ -1,10 +1,10 @@
-# Docker / Get started #
+# Docker / Why you would use docker #
 
 TODO
 
 ## Useful links ##
 
-[Docker documentation page](https://docs.docker.com/get-started/)
+[Docker documentation page](https://www.docker.com/use-cases)
 
 | Navigation               |
 | ------------------------ |

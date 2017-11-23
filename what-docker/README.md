@@ -1,10 +1,10 @@
-# Docker / Get started #
+# Docker / What docker is #
 
 TODO
 
 ## Useful links ##
 
-[Docker documentation page](https://docs.docker.com/get-started/)
+[Docker documentation page](https://www.docker.com/what-docker)
 
 | Navigation               |
 | ------------------------ |
