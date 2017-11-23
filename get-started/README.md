@@ -1,4 +1,4 @@
-# Get started / Docker #
+# Docker / Get started #
 
 TODO
 
