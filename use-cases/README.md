@@ -1,4 +1,4 @@
-# Docker / Why you would use docker #
+# Docker / Why you would use Docker #
 
 TODO
 
