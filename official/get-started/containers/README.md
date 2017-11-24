@@ -131,7 +131,7 @@ Now use **docker container stop** to end the process, using the **CONTAINER ID**
 
 ## Share your image ##
 
-TODO
+Now you could [Share your image](../share-image/README.md)
 
 ## Useful links ##
 
