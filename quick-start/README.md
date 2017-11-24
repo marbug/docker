@@ -102,6 +102,24 @@ Run the app, mapping your machine’s port 4000 to the container’s published p
 
 And open [http://localhost:4000](http://localhost:4000) in your browser.
 
+## Stop the app ##
+
+Hit **CTRL+C** in your terminal to quit.
+
+## Run the app in background ##
+
+    docker run -d -p 4000:80 friendlyhello
+
+Check
+
+    docker container ls
+
+### Stop the background app ###
+
+Now use **docker container stop** to end the process, using the **CONTAINER ID**, like so:
+
+    docker container stop 01cb7916182c
+
 TODO
 
 | Navigation               |

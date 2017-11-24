@@ -111,7 +111,25 @@ Go to that URL in a web browser to see the display content served up on a web pa
 
 **Note:** If you are using Docker Toolbox on Windows 7, use the Docker Machine IP instead of localhost. For example, [http://192.168.99.100:4000/](http://192.168.99.100:4000/). To find the IP address, use the command **docker-machine ip**.
 
-## TODO ##
+### Stop the app ###
+
+Hit **CTRL+C** in your terminal to quit.
+
+### Run the app in background ###
+
+    docker run -d -p 4000:80 friendlyhello
+
+You get the long container ID for your app and then are kicked back to your terminal. Your container is running in the background. You can also see the abbreviated container ID with **docker container ls**
+
+You’ll see that CONTAINER ID matches what’s on [http://localhost:4000](http://localhost:4000).
+
+### Stop the background app ###
+
+Now use **docker container stop** to end the process, using the **CONTAINER ID**, like so:
+
+    docker container stop 01cb7916182c
+
+## Share your image ##
 
 TODO
 
