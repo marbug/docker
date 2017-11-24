@@ -84,6 +84,12 @@ In the same folder with the **Dockerfile**.
 
 ## Build the app ##
 
+    docker build -t friendlyhello .
+
+Check
+
+    docker images
+
 TODO
 
 | Navigation               |

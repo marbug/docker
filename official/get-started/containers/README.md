@@ -89,6 +89,14 @@ That’s it! You don’t need Python or anything in **requirements.txt** on your
 
 ### Build the app ###
 
+Now run the build command. This creates a Docker image, which we’re going to tag using **-t** so it has a friendly name.
+
+    docker build -t friendlyhello .
+
+Where is your built image? It’s in your machine’s local Docker image registry:
+
+    docker images
+
 TODO
 
 ## TODO ##
