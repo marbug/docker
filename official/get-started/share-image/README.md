@@ -1,4 +1,4 @@
-# Docker / Get started / Share iamge #
+# Docker / Get started / Share image #
 
 TODO
 
