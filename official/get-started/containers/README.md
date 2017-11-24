@@ -97,7 +97,19 @@ Where is your built image? It’s in your machine’s local Docker image registr
 
     docker images
 
-TODO
+**Tip:** You can use the commands docker images or the newer **docker image ls** list images. They give you the same output.
+
+### Run the app ###
+
+Run the app, mapping your machine’s port 4000 to the container’s published port 80 using **-p**:
+
+    docker run -p 4000:80 friendlyhello
+
+You should see a message that Python is serving your app at [http://0.0.0.0:80](http://0.0.0.0:80). But that message is coming from inside the container, which doesn’t know you mapped port 80 of that container to 4000, making the correct URL [http://localhost:4000](http://localhost:4000).
+
+Go to that URL in a web browser to see the display content served up on a web page, including “Hello World” text, the container ID, and the Redis error message.
+
+**Note:** If you are using Docker Toolbox on Windows 7, use the Docker Machine IP instead of localhost. For example, [http://192.168.99.100:4000/](http://192.168.99.100:4000/). To find the IP address, use the command **docker-machine ip**.
 
 ## TODO ##
 

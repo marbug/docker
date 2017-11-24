@@ -90,6 +90,18 @@ Check
 
     docker images
 
+or
+
+    docker image ls
+
+## Run the app ##
+
+Run the app, mapping your machine’s port 4000 to the container’s published port 80 using **-p**:
+
+    docker run -p 4000:80 friendlyhello
+
+And open [http://localhost:4000](http://localhost:4000) in your browser.
+
 TODO
 
 | Navigation               |
