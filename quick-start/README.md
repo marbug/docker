@@ -4,6 +4,7 @@
 * [Create Dockerfile](create-dockerfile/README.md)
 * [Create app files](create-app-files/README.md)
 * [Build, run, stop](build-run-stop/README.md)
+* [Share image](share-image/README.md)
 
 TODO
 
