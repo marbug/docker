@@ -72,6 +72,8 @@ Before we can use the **docker stack deploy** command we’ll first run:
 
     docker swarm init
 
+**Note:** We’ll get into the meaning of that command in [part 4](../swarms/README.md). If you don’t run docker swarm init you’ll get an error that “this node is not a swarm manager.”
+
 You'll see something like the following:
 
     warm initialized: current node (qjty6tdftu2vy4ux5pb116n8s) is now a manager.
