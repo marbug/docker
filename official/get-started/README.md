@@ -3,6 +3,7 @@
 * [About](about/README.md)
 * [Containers](containers/README.md)
 * [Share image](share-image/README.md)
+* [Services](services/README.md)
 
 ## Useful links ##
 
