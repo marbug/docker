@@ -132,7 +132,27 @@ Depending on your environment’s networking configuration, it may take up to 30
 
 ## Scale the app ##
 
-TODO
+You can scale the app by changing the **replicas** value in **docker-compose.yml**, saving the change, and re-running the **docker stack deploy** command:
+
+    docker stack deploy -c docker-compose.yml getstartedlab
+
+Docker will do an in-place update, no need to tear the stack down first or kill any containers.
+
+Now, re-run **docker container ls -q** to see the deployed instances reconfigured. If you scaled up the replicas, more tasks, and hence, more containers, are started.
+
+## Take down the app and the swarm ##
+
+* Take the app down with **docker stack rm**:
+
+    docker stack rm getstartedlab
+
+* Take down the swarm.
+
+    docker swarm leave --force
+
+It’s as easy as that to stand up and scale your app with Docker. You’ve taken a huge step towards learning how to run containers in production. Up next, you will learn how to run this app as a bonafide swarm on a cluster of Docker machines.
+
+**Note:** Compose files like this are used to define applications with Docker, and can be uploaded to cloud providers using [Docker Cloud](TODO), or on any hardware or cloud provider you choose with [Docker Enterprise Edition](https://www.docker.com/enterprise-edition).
 
 ## Useful links ##
 
