@@ -93,7 +93,6 @@ You'll see something like the following:
     Creating network getstartedlab_webnet
     Creating service getstartedlab_web
 
-
 Our single service stack is running 5 container instances of our deployed image on one host. Let’s investigate.
 
 Get the service ID for the one service in our application:

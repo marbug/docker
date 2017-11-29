@@ -48,7 +48,47 @@ This **docker-compose.yml** file tells Docker to do the following:
 
 * Define the **webnet** network with the default settings (which is a load-balanced overlay network).
 
-TODO
+## Run your new load-balanced app ##
+
+Before we can use the **docker stack deploy** command we’ll first run:
+
+    docker swarm init
+
+**Note:** We’ll get into the meaning of that command in [part 4](../swarms/README.md). If you don’t run **docker swarm init** you’ll get an error that “this node is not a swarm manager.”
+
+Now let’s run it. You have to give your app a name. Here, it is set to **getstartedlab**:
+
+    docker stack deploy -c docker-compose.yml getstartedlab
+
+Our single service stack is running 5 container instances of our deployed image on one host. Let’s investigate.
+
+Get the service ID for the one service in our application:
+
+    docker service ls
+
+A single container running in a service is called a **task**. Tasks are given unique IDs that numerically increment, up to the number of **replicas** you defined in **docker-compose.yml**. List the tasks for your service:
+
+    docker service ps getstartedlab_web
+
+## Scale the app ##
+
+You can scale the app by changing the **replicas** value in **docker-compose.yml**, saving the change, and re-running the **docker stack deploy** command:
+
+    docker stack deploy -c docker-compose.yml getstartedlab
+
+Docker will do an in-place update, no need to tear the stack down first or kill any containers.
+
+Now, re-run **docker container ls -q** to see the deployed instances reconfigured. If you scaled up the replicas, more tasks, and hence, more containers, are started.
+
+## Take down the app and the swarm ##
+
+* Take the app down with **docker stack rm**:
+
+    docker stack rm getstartedlab
+
+* Take down the swarm.
+
+    docker swarm leave --force
 
 | Navigation               |
 | ------------------------ |
