@@ -84,11 +84,11 @@ Now, re-run **docker container ls -q** to see the deployed instances reconfigure
 
 * Take the app down with **docker stack rm**:
 
-    docker stack rm getstartedlab
+        docker stack rm getstartedlab
 
 * Take down the swarm.
 
-    docker swarm leave --force
+        docker swarm leave --force
 
 | Navigation               |
 | ------------------------ |

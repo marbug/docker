@@ -143,11 +143,11 @@ Now, re-run **docker container ls -q** to see the deployed instances reconfigure
 
 * Take the app down with **docker stack rm**:
 
-    docker stack rm getstartedlab
+        docker stack rm getstartedlab
 
 * Take down the swarm.
 
-    docker swarm leave --force
+        docker swarm leave --force
 
 It’s as easy as that to stand up and scale your app with Docker. You’ve taken a huge step towards learning how to run containers in production. Up next, you will learn how to run this app as a bonafide swarm on a cluster of Docker machines.
 
