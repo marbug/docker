@@ -90,6 +90,10 @@ Now, re-run **docker container ls -q** to see the deployed instances reconfigure
 
         docker swarm leave --force
 
+## Useful links ##
+
+[Docker documentation page](https://docs.docker.com/get-started/part3/)
+
 | Navigation               |
 | ------------------------ |
 | [Level up](../README.md) |

@@ -1,4 +1,4 @@
-# Docker / Get started / Swarms #
+# Docker / Quick start / Swarms #
 
 TODO
 
