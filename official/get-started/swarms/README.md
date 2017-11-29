@@ -82,6 +82,12 @@ You can send commands to your VMs using **docker-machine ssh**. Instruct **myvm1
 
     To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 
+#### Ports 2377 and 2376 ####
+
+Always run **docker swarm init** and **docker swarm join** with port 2377 (the swarm management port), or no port at all and let it take the default.
+
+The machine IP addresses returned by **docker-machine ls** include port 2376, which is the Docker daemon port. Do not use this port or you may experience errors.
+
 As you can see, the response to **docker swarm init** contains a pre-configured **docker swarm join** command for you to run on any nodes you want to add. Copy this command, and send it to **myvm2** via **docker-machine ssh** to have **myvm2** join your new swarm as a worker:
 
     $ docker-machine ssh myvm2 "docker swarm join \
@@ -105,13 +111,66 @@ If you want to start over, you can run **docker swarm leave** from each node.
 
 ## Deploy your app on the swarm cluster ##
 
+The hard part is over. Now you just repeat the process you used in [part 3 (services)](../services/README.md) to deploy on your new swarm. Just remember that only swarm managers like **myvm1** execute Docker commands; workers are just for capacity.
+
+### Configure a docker-machine shell to the swarm manager ###
+
+So far, you’ve been wrapping Docker commmands in **docker-machine ssh** to talk to the VMs. Another option is to run **docker-machine env <machine>** to get and run a command that configures your current shell to talk to the Docker daemon on the VM. This method works better for the next step because it allows you to use your local **docker-compose.yml** file to deploy the app “remotely” without having to copy it anywhere.
+
+Type **docker-machine env myvm1**, then copy-paste and run the command provided as the last line of the output to configure your shell to talk to **myvm1**, the swarm manager.
+
+The commands to configure your shell differ depending on whether you are Mac, Linux, or Windows, so examples of each are shown on the tabs below.
+
+#### Mac, Linux ####
+
+Run **ocker-machine env myvm1** to get the command to configure your shell to talk to **myvm1**.
+
+    $ docker-machine env myvm1
+    export DOCKER_TLS_VERIFY="1"
+    export DOCKER_HOST="tcp://192.168.99.100:2376"
+    export DOCKER_CERT_PATH="/Users/sam/.docker/machine/machines/myvm1"
+    export DOCKER_MACHINE_NAME="myvm1"
+    # Run this command to configure your shell:
+    # eval $(docker-machine env myvm1)
+
+Run the given command to configure your shell to talk to **myvm1**.
+
+    eval $(docker-machine env myvm1)
+
+Run **docker-machine ls** to verify that **myvm1** is now the active machine, as indicated by the asterisk next to it.
+
+    $ docker-machine ls
+    NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
+    myvm1   *        virtualbox   Running   tcp://192.168.99.100:2376           v17.06.2-ce
+    myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce
+
+#### Windows ####
+
+Run **docker-machine env myvm1** to get the command to configure your shell to talk to myvm1.
+
+    PS C:\Users\sam\sandbox\get-started> docker-machine env myvm1
+    $Env:DOCKER_TLS_VERIFY = "1"
+    $Env:DOCKER_HOST = "tcp://192.168.203.207:2376"
+    $Env:DOCKER_CERT_PATH = "C:\Users\sam\.docker\machine\machines\myvm1"
+    $Env:DOCKER_MACHINE_NAME = "myvm1"
+    $Env:COMPOSE_CONVERT_WINDOWS_PATHS = "true"
+    # Run this command to configure your shell:
+    # & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
+
+Run the given command to configure your shell to talk to **myvm1**.
+
+    & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
+
+Run **docker-machine ls** to verify that **myvm1** is the active machine as indicated by the asterisk next to it.
+
+    PS C:PATH> docker-machine ls
+    NAME    ACTIVE   DRIVER   STATE     URL                          SWARM   DOCKER        ERRORS
+    myvm1   *        hyperv   Running   tcp://192.168.203.207:2376           v17.06.2-ce
+    myvm2   -        hyperv   Running   tcp://192.168.200.181:2376           v17.06.2-ce
+
+### Deploy the app on the swarm manager ###
+
 TODO
-
-#### Ports 2377 and 2376 ####
-
-Always run **docker swarm init** and **docker swarm join** with port 2377 (the swarm management port), or no port at all and let it take the default.
-
-The machine IP addresses returned by **docker-machine ls** include port 2376, which is the Docker daemon port. Do not use this port or you may experience errors.
 
 ## Useful links ##
 
