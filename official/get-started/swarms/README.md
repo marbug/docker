@@ -67,7 +67,51 @@ Here is example output from this command.
 
 ### INITIALIZE THE SWARM AND ADD NODES ###
 
+The first machine will act as the manager, which executes management commands and authenticates workers to join the swarm, and the second will be a worker.
+
+You can send commands to your VMs using **docker-machine ssh**. Instruct **myvm1** to become a swarm manager with **docker swarm init** and you’ll see output like this:
+
+    $ docker-machine ssh myvm1 "docker swarm init --advertise-addr <myvm1 ip>"
+    Swarm initialized: current node <node ID> is now a manager.
+
+    To add a worker to this swarm, run the following command:
+
+      docker swarm join \
+      --token <token> \
+      <myvm ip>:<port>
+
+    To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+As you can see, the response to **docker swarm init** contains a pre-configured **docker swarm join** command for you to run on any nodes you want to add. Copy this command, and send it to **myvm2** via **docker-machine ssh** to have **myvm2** join your new swarm as a worker:
+
+    $ docker-machine ssh myvm2 "docker swarm join \
+    --token <token> \
+    <ip>:2377"
+
+    This node joined a swarm as a worker.
+
+Congratulations, you have created your first swarm!
+
+Run **docker node ls** on the manager to view the nodes in this swarm:
+
+    $ docker-machine ssh myvm1 "docker node ls"
+    ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+    brtu9urxwfd5j0zrmkubhpkbd     myvm2               Ready               Active
+    rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active              Leader
+
+### Leaving a swarm ###
+
+If you want to start over, you can run **docker swarm leave** from each node.
+
+## Deploy your app on the swarm cluster ##
+
 TODO
+
+#### Ports 2377 and 2376 ####
+
+Always run **docker swarm init** and **docker swarm join** with port 2377 (the swarm management port), or no port at all and let it take the default.
+
+The machine IP addresses returned by **docker-machine ls** include port 2376, which is the Docker daemon port. Do not use this port or you may experience errors.
 
 ## Useful links ##
 
