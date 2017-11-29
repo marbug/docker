@@ -18,9 +18,54 @@ Up until now, you have been using Docker in a single-host mode on your local mac
 
 ## Set up your swarm ##
 
-A swarm is made up of multiple nodes, which can be either physical or virtual machines. The basic concept is simple enough: run **docker swarm init** to enable swarm mode and make your current machine a swarm manager, then run **docker swarm join** on other machines to have them join the swarm as workers. Choose a tab below to see how this plays out in various contexts. We’ll use VMs to quickly create a two-machine cluster and turn it into a swarm.
+A swarm is made up of multiple nodes, which can be either physical or virtual machines. The basic concept is simple enough: run **docker swarm init** to enable swarm mode and make your current machine a swarm manager, then run **docker swarm join** on other machines to have them join the swarm as workers. Choose a section below to see how this plays out in various contexts. We’ll use VMs to quickly create a two-machine cluster and turn it into a swarm.
 
 ## Create a cluster ##
+
+### Local VMs (Mac, Linux, Windows 7 and 8) ###
+
+#### VMS ON YOUR LOCAL MACHINE (MAC, LINUX, WINDOWS 7 AND 8) ####
+
+First, you’ll need a hypervisor that can create virtual machines (VMs), so [install Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads) for your machine’s OS.
+
+**Note:** If you are on a Windows system that has Hyper-V installed, such as Windows 10, there is no need to install VirtualBox and you should use Hyper-V instead. View the instructions for Hyper-V systems below. If you are using Docker Toolbox, you should already have VirtualBox installed as part of it, so you are good to go.
+
+Now, create a couple of VMs using **docker-machine**, using the VirtualBox driver:
+
+    docker-machine create --driver virtualbox myvm1
+    docker-machine create --driver virtualbox myvm2
+
+### Local VMs (Windows 10/Hyper-V) ###
+
+#### VMS ON YOUR LOCAL MACHINE (WINDOWS 10) ####
+
+First, quickly create a virtual switch for your virtual machines (VMs) to share, so they will be able to connect to each other.
+
+    1. Launch Hyper-V Manager
+    2. Click **Virtual Switch Manager** in the right-hand menu
+    3. Click **Create Virtual Switch** of type **External**
+    4. Give it the name **myswitch**, and check the box to share your host machine’s active network adapter
+
+Now, create a couple of VMs using our node management tool, **docker-machine**:
+
+    docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1
+    docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
+
+### LIST THE VMS AND GET THEIR IP ADDRESSES ###
+
+You now have two VMs created, named **myvm1** and **myvm2**.
+
+Use this command to list the machines and get their IP addresses.
+
+    docker-machine ls
+
+Here is example output from this command.
+
+    NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
+    myvm1   -        virtualbox   Running   tcp://192.168.99.100:2376           v17.06.2-ce
+    myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce
+
+### INITIALIZE THE SWARM AND ADD NODES ###
 
 TODO
 
