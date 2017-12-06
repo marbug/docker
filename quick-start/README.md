@@ -7,6 +7,7 @@
 * [Share image](share-image/README.md)
 * [Services](services/README.md)
 * [Swarms](swarms/README.md)
+* [Stacks](stacks/README.md)
 
 TODO
 
