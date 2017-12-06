@@ -215,7 +215,53 @@ The reason both IP addresses work is that nodes in a swarm participate in an ing
 
 ### Iterating and scaling your app ###
 
-TODO
+From here you can do everything you learned about in parts 2 and 3.
+
+Scale the app by changing the **docker-compose.yml** file.
+
+Change the app behavior by editing code, then rebuild, and push the new image. (To do this, follow the same steps you took earlier to [build the app](TODO) and [publish the image](TODO)).
+
+In either case, simply run **docker stack deploy** again to deploy these changes.
+
+You can join any machine, physical or virtual, to this swarm, using the same **docker swarm join** command you used on **myvm2**, and capacity will be added to your cluster. Just run **docker stack deploy** afterwards, and your app will take advantage of the new resources.
+
+### Cleanup and reboot ###
+
+#### Stacks and swarms ####
+
+You can tear down the stack with **docker stack rm**. For example:
+
+    docker stack rm getstartedlab
+
+#### Keep the swarm or remove it? ####
+
+At some point later, you can remove this swarm if you want to with **docker-machine ssh myvm2 "docker swarm leave"** on the worker and **docker-machine ssh myvm1 "docker swarm leave --force"** on the manager, but *you’ll need this swarm for part 5, so please keep it around for now*.
+
+#### Unsetting docker-machine shell variable settings ####
+
+You can unset the **docker-machine** environment variables in your current shell with the following command:
+
+    eval $(docker-machine env -u)
+
+This disconnects the shell from **docker-machine** created virtual machines, and allows you to continue working in the same shell, now using native **docker** commands (for example, on Docker for Mac or Docker for Windows). To learn more, see the [Machine topic on unsetting environment variables](TODO).
+
+#### Restarting Docker machines ####
+
+If you shut down your local host, Docker machines will stop running. You can check the status of machines by running **docker-machine ls**.
+
+    $ docker-machine ls
+    NAME    ACTIVE   DRIVER       STATE     URL   SWARM   DOCKER    ERRORS
+    myvm1   -        virtualbox   Stopped                 Unknown
+    myvm2   -        virtualbox   Stopped                 Unknown
+
+To restart a machine that’s stopped, run:
+
+    docker-machine start <machine-name>
+
+For example:
+
+    $ docker-machine start myvm1
+    $ docker-machine start myvm2
 
 ## Useful links ##
 
