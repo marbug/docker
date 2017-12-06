@@ -203,6 +203,18 @@ This tutorial demos both **docker-machine ssh** and **docker-machine env**, sinc
 
 ### Accessing your cluster ###
 
+You can access your app from the IP address of either **myvm1** or **myvm2**.
+
+The network you created is shared between them and load-balancing. Run **docker-machine ls** to get your VMs’ IP addresses and visit either of them on a browser, hitting refresh (or just **curl** them).
+
+You’ll see five possible container IDs all cycling by randomly, demonstrating the load-balancing.
+
+The reason both IP addresses work is that nodes in a swarm participate in an ingress **routing mesh**. This ensures that a service deployed at a certain port within your swarm always has that port reserved to itself, no matter what node is actually running the container. Here’s a diagram of how a routing mesh for a service called **my-web** published at port **8080** on a three-node swarm would look:
+
+![ingress-routing-mesh](https://github.com/marbug/docker/ingress-routing-mesh.png)
+
+### Iterating and scaling your app ###
+
 TODO
 
 ## Useful links ##
