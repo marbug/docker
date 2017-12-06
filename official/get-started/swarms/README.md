@@ -170,6 +170,39 @@ Run **docker-machine ls** to verify that **myvm1** is the active machine as indi
 
 ### Deploy the app on the swarm manager ###
 
+Now that you have my **myvm1**, you can use its powers as a swarm manager to deploy your app by using the same **docker stack deploy** command you used in part 3 to **myvm1**, and your local copy of **docker-compose.yml**.
+
+You are connected to **myvm1** by means of the **docker-machine** shell configuration, and you still have access to the files on your local host. Make sure you are in the same directory as before, which includes the **docker-compose.yml** file you created in part 3.
+
+Just like before, run the following command to deploy the app on **myvm1**.
+
+    docker stack deploy -c docker-compose.yml getstartedlab
+
+And that’s it, the app is deployed on a swarm cluster!
+
+Now you can use the same docker commands you used in part 3. Only this time you’ll see that the services (and associated containers) have been distributed between both **myvm1** and **myvm2**.
+
+    $ docker stack ps getstartedlab
+
+    ID            NAME                  IMAGE                   NODE   DESIRED STATE
+    jq2g3qp8nzwx  getstartedlab_web.1   john/get-started:part2  myvm1  Running
+    88wgshobzoxl  getstartedlab_web.2   john/get-started:part2  myvm2  Running
+    vbb1qbkb0o2z  getstartedlab_web.3   john/get-started:part2  myvm2  Running
+    ghii74p9budx  getstartedlab_web.4   john/get-started:part2  myvm1  Running
+    0prmarhavs87  getstartedlab_web.5   john/get-started:part2  myvm2  Running
+
+### Connecting to VMs ###
+
+* To set your shell to talk to a different machine like **myvm2**, simply re-run **docker-machine env** in the same or a different shell, then run the given command to point to **myvm2**. This is always specific to the current shell. If you change to an unconfigured shell or open a new one, you need to re-run the commands. Use **docker-machine ls** to list machines, see what state they are in, get IP addresses, and find out which one, if any, you are connected to. To learn more, see the [Docker Machine getting started topics](TODO).
+
+* Alternatively, you can wrap Docker commands in the form of **docker-machine ssh <machine> "<command>"**, which logs directly into the VM but doesn’t give you immediate access to files on your local host.
+
+* On Mac and Linux, you can use **docker-machine scp <file> <machine>:~** to copy files across machines, but Windows users need a Linux terminal emulator like [Git Bash](https://git-for-windows.github.io/) in order for this to work.
+
+This tutorial demos both **docker-machine ssh** and **docker-machine env**, since these are available on all platforms via the **docker-machine** CLI.
+
+### Accessing your cluster ###
+
 TODO
 
 ## Useful links ##
