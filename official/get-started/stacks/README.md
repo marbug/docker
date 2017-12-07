@@ -65,11 +65,11 @@ We’ll talk more about placement constraints and volumes in a moment.
 
     * On Mac or Linux the command is:
 
-        eval $(docker-machine env myvm1)
+            eval $(docker-machine env myvm1)
 
     * On Windows the command is:
 
-        & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
+            & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
 
 3. Re-run the **docker stack deploy** command on the manager, and whatever services need updating will be updated:
 
