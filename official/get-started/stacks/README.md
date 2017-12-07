@@ -91,6 +91,53 @@ The visualizer is a standalone service that can run in any app that includes it 
 
 ## Persist the data ##
 
+Let’s go through the same workflow once more to add a Redis database for storing app data.
+
+1. Save this new **docker-compose.yml** file, which finally adds a Redis service. Be sure to replace **username/repo:tag** with your image details.
+
+        version: "3"
+        services:
+          web:
+            # replace username/repo:tag with your name and image details
+            image: username/repo:tag
+            deploy:
+              replicas: 5
+              restart_policy:
+                condition: on-failure
+              resources:
+                limits:
+                  cpus: "0.1"
+                  memory: 50M
+            ports:
+              - "80:80"
+            networks:
+              - webnet
+          visualizer:
+            image: dockersamples/visualizer:stable
+            ports:
+              - "8080:8080"
+            volumes:
+              - "/var/run/docker.sock:/var/run/docker.sock"
+            deploy:
+              placement:
+                constraints: [node.role == manager]
+            networks:
+              - webnet
+          redis:
+            image: redis
+            ports:
+              - "6379:6379"
+            volumes:
+              - /home/docker/data:/data
+            deploy:
+              placement:
+                constraints: [node.role == manager]
+            command: redis-server --appendonly yes
+            networks:
+              - webnet
+        networks:
+          webnet:
+
 TODO
 
 ## Useful links ##
