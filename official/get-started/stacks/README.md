@@ -81,7 +81,7 @@ We’ll talk more about placement constraints and volumes in a moment.
 
 You saw in the Compose file that **visualizer** runs on port 8080. Get the IP address of one of your nodes by running **docker-machine ls**. Go to either IP address at port 8080 and you will see the visualizer running:
 
-![get-started-visualizer1](https://github.com/marbug/docker/blob/master/quick-start/images/get-started-visualizer1)
+![get-started-visualizer1](https://github.com/marbug/docker/blob/master/quick-start/images/get-started-visualizer1.png)
 
 TODO
 
