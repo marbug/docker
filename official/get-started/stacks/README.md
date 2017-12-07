@@ -83,6 +83,14 @@ You saw in the Compose file that **visualizer** runs on port 8080. Get the IP ad
 
 ![get-started-visualizer1](https://github.com/marbug/docker/blob/master/quick-start/images/get-started-visualizer1.png)
 
+The single copy of **visualizer** is running on the manager as you expect, and the 5 instances of **web** are spread out across the swarm. You can corroborate this visualization by running **docker stack ps <stack>**:
+
+    docker stack ps getstartedlab
+
+The visualizer is a standalone service that can run in any app that includes it in the stack. It doesn’t depend on anything else. Now let’s create a service that does have a dependency: the Redis service that will provide a visitor counter.
+
+## Persist the data ##
+
 TODO
 
 ## Useful links ##
