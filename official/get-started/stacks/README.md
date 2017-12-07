@@ -73,9 +73,9 @@ We’ll talk more about placement constraints and volumes in a moment.
 
 3. Re-run the **docker stack deploy** command on the manager, and whatever services need updating will be updated:
 
-    $ docker stack deploy -c docker-compose.yml getstartedlab
-    Updating service getstartedlab_web (id: angi1bf5e4to03qu9f93trnxm)
-    Creating service getstartedlab_visualizer (id: l9mnwkeq2jiononb5ihz9u7a4)
+        $ docker stack deploy -c docker-compose.yml getstartedlab
+        Updating service getstartedlab_web (id: angi1bf5e4to03qu9f93trnxm)
+        Creating service getstartedlab_visualizer (id: l9mnwkeq2jiononb5ihz9u7a4)
 
 4. Take a look at the visualizer.
 
