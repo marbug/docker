@@ -55,6 +55,34 @@ It’s easy to add services to our **docker-compose.yml** file. First, let’s a
 
 The only thing new here is the peer service to **web**, named **visualizer**. You’ll see two new things here: a **volumes** key, giving the visualizer access to the host’s socket file for Docker, and a **placement** key, ensuring that this service only ever runs on a swarm manager – never a worker. That’s because this container, built from [an open source project created by Docker](https://github.com/ManoMarks/docker-swarm-visualizer), displays Docker services running on a swarm in a diagram.
 
+We’ll talk more about placement constraints and volumes in a moment.
+
+2. Make sure your shell is configured to talk to **myvm1** (full examples are [here](../swarms/README.md)).
+
+* Run **docker-machine ls** to list machines and make sure you are connected to **myvm1**, as indicated by an asterisk next it.
+
+* If needed, re-run **docker-machine env myvm1**, then run the given command to configure the shell.
+
+    * On Mac or Linux the command is:
+
+        eval $(docker-machine env myvm1)
+
+    * On Windows the command is:
+
+        & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
+
+3. Re-run the **docker stack deploy** command on the manager, and whatever services need updating will be updated:
+
+    $ docker stack deploy -c docker-compose.yml getstartedlab
+    Updating service getstartedlab_web (id: angi1bf5e4to03qu9f93trnxm)
+    Creating service getstartedlab_visualizer (id: l9mnwkeq2jiononb5ihz9u7a4)
+
+4. Take a look at the visualizer.
+
+You saw in the Compose file that **visualizer** runs on port 8080. Get the IP address of one of your nodes by running **docker-machine ls**. Go to either IP address at port 8080 and you will see the visualizer running:
+
+![get-started-visualizer1](https://github.com/marbug/docker/blob/master/quick-start/images/get-started-visualizer1)
+
 TODO
 
 ## Useful links ##
