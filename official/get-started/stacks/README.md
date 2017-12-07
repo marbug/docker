@@ -18,6 +18,43 @@ You’re doing great, this is the home stretch!
 
 ## Add a new service and redeploy ##
 
+It’s easy to add services to our **docker-compose.yml** file. First, let’s add a free visualizer service that lets us look at how our swarm is scheduling containers.
+
+1. Open up **docker-compose.yml** in an editor and replace its contents with the following. Be sure to replace **username/repo:tag** with your image details.
+
+    version: "3"
+    services:
+      web:
+        # replace username/repo:tag with your name and image details
+        image: username/repo:tag
+        deploy:
+          replicas: 5
+          restart_policy:
+            condition: on-failure
+          resources:
+            limits:
+              cpus: "0.1"
+              memory: 50M
+        ports:
+          - "80:80"
+        networks:
+          - webnet
+      visualizer:
+        image: dockersamples/visualizer:stable
+        ports:
+          - "8080:8080"
+        volumes:
+          - "/var/run/docker.sock:/var/run/docker.sock"
+        deploy:
+          placement:
+            constraints: [node.role == manager]
+        networks:
+          - webnet
+    networks:
+      webnet:
+
+The only thing new here is the peer service to **web**, named **visualizer**. You’ll see two new things here: a **volumes** key, giving the visualizer access to the host’s socket file for Docker, and a **placement** key, ensuring that this service only ever runs on a swarm manager – never a worker. That’s because this container, built from [an open source project created by Docker](https://github.com/ManoMarks/docker-swarm-visualizer), displays Docker services running on a swarm in a diagram.
+
 TODO
 
 ## Useful links ##
