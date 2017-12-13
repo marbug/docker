@@ -162,7 +162,27 @@ You are ready to deploy your new Redis-using stack.
 
 3. Make sure your shell is configured to talk to **myvm1** (full examples are here).
 
-TODO
+* Run **docker-machine ls** to list machines and make sure you are connected to **myvm1**, as indicated by an asterisk next it.
+
+* If needed, re-run **docker-machine env myvm1**, then run the given command to configure the shell.
+
+On Mac or Linux the command is:
+
+    eval $(docker-machine env myvm1)
+
+On Windows the command is:
+
+    & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
+
+4. Run **docker stack deploy** one more time.
+
+    docker stack deploy -c docker-compose.yml getstartedlab
+
+5. Run **docker service ls** to verify that the three services are running as expected.
+
+6. Check the web page at one of your nodes (e.g. [http://192.168.99.101](http://192.168.99.101)) and you’ll see the results of the visitor counter, which is now live and storing information on Redis.
+
+Also, check the visualizer at port 8080 on either node’s IP address, and you’ll see the **redis** service running along with the **web** and **visualizer** services.
 
 ## Useful links ##
 
